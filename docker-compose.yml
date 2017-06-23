@@ -1,7 +1,19 @@
-zf:
-  build: .
-  dockerfile: Dockerfile
-  ports:
-   - "8080:80"
-  volumes:
-   - .:/var/www
+version: '2'
+
+services:
+  app:
+    container_name: example_app
+    build: .
+#    dockerfile: Dockerfile
+    ports:
+      - 8080:80
+    volumes:
+     - .:/var/www
+  db:
+    container_name: example_db
+    build: db/
+    ports:
+      - 3307:3306
+    working_dir: /db
+    volumes:
+      - ./db:/db
